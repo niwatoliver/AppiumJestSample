@@ -17,6 +17,7 @@ export default function App() {
       <View style={styles.slide1}>
         <Text style={styles.text}>テキストを入力してね</Text>
         <TextInput
+          accessibilityLabel="TextInput"
           style={styles.textInput}
           value={text}
           onChangeText={(text) => setText(text)}
@@ -24,7 +25,7 @@ export default function App() {
       </View>
       <View style={styles.slide2}>
         <Text style={styles.text}>👇入力されたテキスト👇</Text>
-        <Text style={styles.text}>{text}</Text>
+        <Text style={styles.text} accessibilityLabel="TextInputResult">{text}</Text>
       </View>
       <WebView
         ref={imageWebView}

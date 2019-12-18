@@ -12,3 +12,6 @@ web-report/
 
 # macOS
 .DS_Store
+
+app/AppiumJestSample.app
+app/AppiumJestSample.apk
