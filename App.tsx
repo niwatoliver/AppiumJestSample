@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Linking, TextInput } from 'react-native';
+import {StyleSheet, Text, View, Linking, TextInput } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { WebView } from 'react-native-webview';
 
@@ -28,9 +28,11 @@ export default function App() {
       </View>
       <WebView
         ref={imageWebView}
-        source={require('./html/image.html')}
+        allowFileAccess={true}
+        originWhitelist={['*']}
+        source={{ uri: 'https://minakawa-daiki.github.io/AppiumJestSample/image.html' }}
         onNavigationStateChange={async (event) => {
-          if(!event.url.includes('/html/')) {
+          if(!event.url.includes('minakawa-daiki.github.io')) {
             imageWebView.current.stopLoading();
             await Linking.openURL(event.url);
           }
@@ -41,9 +43,10 @@ export default function App() {
       </View>
       <WebView
         ref={videoWebView}
-        source={require('./html/video.html')}
+        originWhitelist={['*']}
+        source={{ uri: 'https://minakawa-daiki.github.io/AppiumJestSample/video.html' }}
         onNavigationStateChange={async (event) => {
-          if(!event.url.includes('/html/')) {
+          if(!event.url.includes('minakawa-daiki.github.io')) {
             videoWebView.current.stopLoading();
             await Linking.openURL(event.url);
           }
