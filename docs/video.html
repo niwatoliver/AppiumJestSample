@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>sample video</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     .wrapper {
       display: flex;
@@ -11,14 +12,40 @@
       align-items: center;
       height: 100vh;
     }
+    video {
+      max-width: 80vw;
+      max-height: 80vw;
+    }
+    button {
+      margin: 16px;
+      padding: 16px;
+      font-size: 0.8rem;
+      border: 1px solid #000;
+    }
   </style>
 </head>
 <body>
 <div class="wrapper">
-  <h1>👇画像をクリックでQiitaに遷移👇</h1>
+  <p>👇動画をクリックでQiitaに遷移👇</p>
+  <button>音量ON</button>
   <a href="https://qiita.com/" target="_blank">
-    <img src="./sample.png" alt="sample" />
+    <video src="./sample.mp4" poster="sample.png" loop autoplay muted playsinline webkit-playsinline></video>
   </a>
 </div>
+<script>
+  const video = document.querySelector('video');
+  const button = document.querySelector('button');
+  document.querySelector('button').addEventListener('click', function() {
+    if(button.innerText === "音量ON") {
+      video.muted = false;
+      video.volume = 1;
+      button.innerText = "音量OFF";
+    } else {
+      video.muted = true;
+      video.volume = 0;
+      button.innerText = "音量オン";
+    }
+  });
+</script>
 </body>
 </html>
