@@ -70,7 +70,7 @@ describe('AppiumJestSampleアプリのテスト', () => {
     await browser.pause(2000);
     const imageWrap = await browser.$("~imageWrap");
     await imageWrap.click();
-    await browser.pause(2000);
+    await browser.pause(5000);
     // アプリに戻ってくるための処理
     if (platformName === 'Android') {
       await browser.pressKeyCode(4);
