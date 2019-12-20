@@ -6,6 +6,7 @@ const iosEnvironmentOptions = {
     deviceName: "iPhone X",
     automationName: "XCUITest",
     wdaLocalPort: 8100,
+    nativeWebTap: true,
     app: "./app/AppiumJestSample.app"
   }
 };
@@ -15,9 +16,10 @@ const androidEnvironmentOptions = {
   capabilities: {
     platformName: "Android",
     deviceName: "Android Emulator",
-    automationName: "Appium",
-    avd: "Pixel_3_API_29",
+    automationName: "UiAutomator2",
+    avd: "Pixel_3_API_28",
     systemPort: 8200,
+    nativeWebTap: true,
     app: "./app/AppiumJestSample.apk"
   }
 };
