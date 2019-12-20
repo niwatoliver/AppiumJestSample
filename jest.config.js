@@ -26,7 +26,7 @@ const androidEnvironmentOptions = {
 
 module.exports = {
   testEnvironment: "jest-environment-webdriverio",
-  testEnvironmentOptions: iosEnvironmentOptions,
+  testEnvironmentOptions: process.env.ANDROID ? androidEnvironmentOptions : iosEnvironmentOptions,
   moduleFileExtensions: [
     "ts",
     "js"

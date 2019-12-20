@@ -9,6 +9,8 @@
     "build:ios": "expo build:ios -t simulator",
     "build:android": "expo build:android",
     "test": "jest",
+    "test:android": "ANDROID=true jest",
+    "test:ios": "IOS=true jest",
     "appium": "appium --allow-insecure chromedriver_autodownload -p 4723",
     "appium-doctor": "appium-doctor"
   },
