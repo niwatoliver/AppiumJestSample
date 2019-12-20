@@ -10,8 +10,13 @@ npm-debug.*
 web-build/
 web-report/
 
+*.log
+
 # macOS
 .DS_Store
 
 app/AppiumJestSample.app
 app/AppiumJestSample.apk
+
+tests/screenshots/*
+!tests/screenshots/.keep

@@ -1,12 +1,19 @@
 import React from 'react';
-import {StyleSheet, Text, View, Linking, TextInput } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Linking,
+  TextInput,
+  Button,
+  Image,
+  TouchableOpacity
+} from 'react-native';
 import Swiper from 'react-native-swiper';
-import { WebView } from 'react-native-webview';
+import { Video } from "expo-av";
 
 export default function App() {
   const [text, setText] = React.useState<string>('');
-  const imageWebView = React.useRef<WebView>(null);
-  const videoWebView = React.useRef<WebView>(null);
 
   return (
     <Swiper
@@ -14,7 +21,7 @@ export default function App() {
       dotStyle={styles.dotStyle}
       loop={false}
       activeDotStyle={styles.activeDotStyle}>
-      <View style={styles.slide1}>
+      <View style={styles.slide1} accessibilityLabel="slide1">
         <Text style={styles.text}>テキストを入力してね</Text>
         <TextInput
           accessibilityLabel="TextInput"
@@ -23,36 +30,42 @@ export default function App() {
           onChangeText={(text) => setText(text)}
         />
       </View>
-      <View style={styles.slide2}>
+      <View style={styles.slide2} accessibilityLabel="slide2">
         <Text style={styles.text}>👇入力されたテキスト👇</Text>
-        <Text style={styles.text} accessibilityLabel="TextInputResult">{text}</Text>
+        <Text style={styles.text} accessibilityLabel={text}>{text}</Text>
+        <Button
+          title="ここをタップ！"
+          accessibilityLabel="textChangeButton"
+          onPress={() => setText("タップされたよ！")}
+        />
       </View>
-      <WebView
-        ref={imageWebView}
-        allowFileAccess={true}
-        originWhitelist={['*']}
-        source={{ uri: 'https://minakawa-daiki.github.io/AppiumJestSample/image.html' }}
-        onNavigationStateChange={async (event) => {
-          if(!event.url.includes('minakawa-daiki.github.io')) {
-            imageWebView.current.stopLoading();
-            await Linking.openURL(event.url);
-          }
-        }}
-      />
-      <View style={styles.slide4}>
+      <View style={styles.slide3} accessibilityLabel="slide3">
+        <Text style={styles.text}>👇画像をクリックでQiitaに遷移👇</Text>
+        <TouchableOpacity onPress={()=> Linking.openURL('https://qiita.com/')} accessibilityLabel="imageWrap">
+          <Image
+            style={{ width: 200, height: 200 }}
+            source={{ uri: 'https://minakawa-daiki.github.io/AppiumJestSample/sample.png' }}
+          />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.slide4} accessibilityLabel="slide4">
         <Text style={styles.text}>Page 4</Text>
       </View>
-      <WebView
-        ref={videoWebView}
-        originWhitelist={['*']}
-        source={{ uri: 'https://minakawa-daiki.github.io/AppiumJestSample/video.html' }}
-        onNavigationStateChange={async (event) => {
-          if(!event.url.includes('minakawa-daiki.github.io')) {
-            videoWebView.current.stopLoading();
-            await Linking.openURL(event.url);
-          }
-        }}
-      />
+      <View style={styles.slide5} accessibilityLabel="slide5">
+        <Text style={styles.text}>👇動画をクリックでQiitaに遷移👇</Text>
+        <TouchableOpacity onPress={()=> Linking.openURL('https://qiita.com/')} accessibilityLabel="videoWrap">
+          <Video
+            source={{ uri: 'https://minakawa-daiki.github.io/AppiumJestSample/sample.mp4' }}
+            rate={1.0}
+            volume={1.0}
+            isMuted={true}
+            resizeMode="cover"
+            shouldPlay
+            isLooping
+            style={{ width: 320, height: 180 }}
+          />
+        </TouchableOpacity>
+      </View>
     </Swiper>
   );
 }
@@ -77,17 +90,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#97CAE5',
   },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000',
+  },
   slide4: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#92BBD9',
   },
+  slide5: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000',
+  },
   text: {
     color: '#fff',
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: 'bold',
     margin: 8,
+  },
+  button: {
+
   },
   textInput: {
     width: 200,
